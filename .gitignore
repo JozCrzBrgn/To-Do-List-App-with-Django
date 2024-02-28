@@ -1,0 +1,5 @@
+# Ignorar ambiente virtual
+todo_env/
+
+# ignorar archivo de apoyo
+stuffs.txt

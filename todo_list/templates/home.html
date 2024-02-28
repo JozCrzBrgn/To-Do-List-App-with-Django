@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}To-Do List{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{ message }}
+    </div>
+    {%endfor%}
+{% endif %}
+<br/>
+
+    {% if all_items %}
+    <table class="table table-bordered">
+        {% for things in all_items %}
+            {% if things.completed %}
+            <tr class="table-secondary">
+                <td class="striker"><center>{{ things.item }}</center></td>
+                <td><a href="{% url 'uncross' things.id %}"><center><button type="button" class="btn btn-outline-secondary">Uncross</button></center></a></td>
+                <td><a href="{% url 'edit' things.id %}"><center><button type="button" class="btn btn-outline-warning">Edit</button></center></a></td>
+                <td><a href="{% url 'delete' things.id %}"><center><button type="button" class="btn btn-outline-danger">Delete</button></center></a></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td><center>{{ things.item }}</center></td>
+                <td><a href="{% url 'cross_off' things.id %}"><center><button type="button" class="btn btn-secondary">Cross off</button></center></a></td>
+                <td><a href="{% url 'edit' things.id %}"><center><button type="button" class="btn btn-warning">Edit</button></center></a></td>
+                <td><a href="{% url 'delete' things.id %}"><center><button type="button" class="btn btn-danger">Delete</button></center></a></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
+
+{% endblock %}
